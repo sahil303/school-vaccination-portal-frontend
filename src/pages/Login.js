@@ -1,50 +1,68 @@
-// src/pages/Login.js
+// src/pages/LoginPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import '../styles/Login.css';
 
 function Login() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // Hardcoded credentials for the school coordinator (admin role)
+  const MOCK_USERNAME = 'Admin';
+  const MOCK_PASSWORD = 'password123';
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setError('');
 
-    try {
-      const response = await axios.post('http://localhost:5000/api/login', formData);
-      if (response.status === 200) {
-        localStorage.setItem('loggedIn', 'true');
-        navigate('/dashboard');
-      }
-    } catch (err) {
-      setError('Invalid credentials');
+    if (username === MOCK_USERNAME && password === MOCK_PASSWORD) {
+      localStorage.setItem('userRole', 'admin');
+
+      navigate('/dashboard', { replace: true });
+    } else {
+      setError('Invalid username or password. Please try again.');
     }
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Username:</label>
-          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+    <div className="login-page-container">
+      <div className="login-form-container">
+        <h2>School Vaccination Portal</h2>
+        <h3>Coordinator Login</h3>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username/Email:</label>
+            <input
+              type="text" // Could be "email" type for better semantics
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder="e.g., coordinator@school.com"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="e.g., password123"
+            />
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit" className="login-button">Login</button>
+        </form>
+        <div className="login-info">
+            <p>Hint: Use the following credentials for demo:</p>
+            <p>Username: <strong>coordinator@school.com</strong></p>
+            <p>Password: <strong>password123</strong></p>
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Password:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 }
