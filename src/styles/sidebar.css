@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+
+.sidebar {
+  background: linear-gradient(to bottom, #6a11cb, #2575fc);
+  color: #fff;
+  transition: width 0.5s ease;
+  width: 250px;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.closed {
+  width: 60px;
+  min-width: 60px;
+}
+
+.sidebar-header {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  letter-spacing: 1.5px;
+  text-align: center;
+  border-bottom: 1px solid #3a4a53;
+  user-select: none;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #cfd8dc;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  align-self: flex-end;
+  transition: color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #ffffff;
+}
+
+.menu {
+  margin-top: 1rem;
+  flex-grow: 1;
+}
+
+.menu-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.menu-item:hover {
+  background-color: #0d0d6583;
+}
+
+.menu-icon {
+  margin-right: 1.2rem;
+  font-size: 1.25rem;
+  width: 35px;
+  text-align: center;
+}
+
+.menu-text {
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.closed .menu-text {
+  opacity: 0;
+  pointer-events: none;
+}
