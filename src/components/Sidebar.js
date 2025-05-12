@@ -6,6 +6,7 @@ import home from '../assets/home.png'
 import groups from '../assets/groups.png'
 import vaccine from '../assets/vaccine.png'
 import report from '../assets/report.png'
+import logout from '../assets/logout.png'
 
 function Sidebar() {
 const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -32,6 +33,12 @@ const navigateToDashboard = () =>
   const navigateToReports = () =>
   {
     navigate('/reports');
+  };
+
+  const navigateToLogin = () =>
+  {
+    sessionStorage.clear();
+    navigate('/login', {replace: true});
   };
 
   return (
@@ -63,6 +70,10 @@ const navigateToDashboard = () =>
           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToReports}>
             <img className="menu-icon" aria-hidden="true" src={report} alt='report'/>
             <span className="menu-text">Reports</span>
+          </div>
+          <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToLogin}>
+            <img className="menu-icon" aria-hidden="true" src={logout} alt='Logout'/>
+            <span className="menu-text">Logout</span>
           </div>
         </div>
       </nav>

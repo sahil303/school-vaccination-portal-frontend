@@ -76,28 +76,105 @@ body, html, #root {
 .card-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #555;
+  color: #333;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  display: inline-block; 
 }
 
 .card-value {
   font-size: 1.8rem;
   font-weight: 750;
-  color: #3d6acb;
+  color: #007bff; 
 }
 
-.chart-container {
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.section-title {
+  color: #333; 
+  margin-top: 0; 
+  margin-bottom: 20px; 
+  font-size: 1.5em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #007bff;
+  display: inline-block; 
+}
+
+.upcoming-drives-section {
+  background-color: #ffffff; 
+  padding: 25px;
   border-radius: 8px;
-  padding: 1rem;
-  height: 300px;
-  display: flex;
-  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+  margin-bottom: 30px;
 }
 
+.upcoming-drives-section .section-title {
+  text-align: center;
+  border-bottom: none;
+  color: #2c3e50;
+}
+
+.drives-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drive-item-card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.drive-item-card:last-child {
+  margin-bottom: 0;
+}
+
+.drive-item-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.drive-item-card h4 {
+  color: #007bff;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.15em;
+}
+
+.drive-item-card p {
+  font-size: 0.95em;
+  color: #495057;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.drive-item-card p strong {
+  color: #212529;
+}
+.no-drives-message {
+  color: #6c757d; 
+  font-style: italic;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px dashed #ced4da;
+}
+
+@media (max-width: 768px) {
+  .upcoming-drives-section .section-title {
+    font-size: 1.3em; 
+  }
+  .drive-item h4 {
+    font-size: 1.1em;
+  }
+  .drive-item p {
+    font-size: 0.9em;
+  }
+}
 .error-message {
   color: #dc3545; 
   background-color: #f8d7da;
@@ -107,3 +184,4 @@ body, html, #root {
   margin-bottom: 15px;
   font-size: 14px;
 }
+
