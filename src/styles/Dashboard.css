@@ -17,83 +17,6 @@ body, html, #root {
   overflow: hidden;
 }
 
-.sidebar {
-  background-color: #2f3e46;
-  color: #fff;
-  transition: width 0.3s ease;
-  width: 250px;
-  min-width: 250px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-.sidebar.closed {
-  width: 60px;
-  min-width: 60px;
-}
-
-.sidebar-header {
-  padding: 1rem;
-  font-weight: bold;
-  font-size: 1.25rem;
-  letter-spacing: 1.5px;
-  text-align: center;
-  border-bottom: 1px solid #3a4a53;
-  user-select: none;
-}
-
-.toggle-btn {
-  background: none;
-  border: none;
-  color: #cfd8dc;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  align-self: flex-end;
-  transition: color 0.2s ease;
-}
-
-.toggle-btn:hover {
-  color: #ffffff;
-}
-
-.menu {
-  margin-top: 1rem;
-  flex-grow: 1;
-}
-
-.menu-item {
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: background-color 0.3s ease;
-  user-select: none;
-}
-
-.menu-item:hover {
-  background-color: #354f52;
-}
-
-.menu-icon {
-  margin-right: 1rem;
-  font-size: 1.25rem;
-  width: 24px;
-  text-align: center;
-}
-
-.menu-text {
-  white-space: nowrap;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.sidebar.closed .menu-text {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .content {
   flex-grow: 1;
   padding: 1.5rem;
@@ -121,6 +44,7 @@ body, html, #root {
 .profile-name {
   margin-left: 0.75rem;
   font-weight: 600;
+  font-size: 1.2rem;
   color: #1b262c;
 }
 
@@ -135,11 +59,11 @@ body, html, #root {
   background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
-  padding: 1rem 1.25rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   user-select: none;
   transition: transform 0.2s ease;
 }
@@ -150,8 +74,8 @@ body, html, #root {
 }
 
 .card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   color: #555;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
@@ -160,8 +84,8 @@ body, html, #root {
 
 .card-value {
   font-size: 1.8rem;
-  font-weight: 700;
-  color: #0b6e4f;
+  font-weight: 750;
+  color: #3d6acb;
 }
 
 .chart-container {
@@ -172,4 +96,14 @@ body, html, #root {
   height: 300px;
   display: flex;
   justify-content: center;
+}
+
+.error-message {
+  color: #dc3545; 
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
