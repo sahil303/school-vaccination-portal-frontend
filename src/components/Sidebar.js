@@ -17,7 +17,7 @@ const toggleSidebar = () => {
 };
 const navigateToDashboard = () =>
   {
-    window.location.reload();
+   navigate('/dashboard'); 
   };
 
   const navigateToStudents = () =>

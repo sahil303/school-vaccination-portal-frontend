@@ -101,7 +101,7 @@ const Dashboard = () => {
                 ))}
               </ul>
             ) : (
-              <p className="no-drives-message">No upcoming drives scheduled at the moment.</p>
+              <p className="no-drives-message">No upcoming drives.</p>
             )}
           </div>
         </section>

@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Drives from './pages/Drives';
-import Students from './pages/Students';
+import StudentsManagement from './pages/Students';
 import Reports from './pages/Reports';
+import EditStudentDetails from './pages/EditStudentDetails';
 
 const isAuthenticated = () => sessionStorage.getItem('isLoggedIn');
 
@@ -35,13 +36,26 @@ function App() {
           path="/students"
           element={
             <ProtectedRoute>
-              <Students/>
+              <StudentsManagement/>
             </ProtectedRoute>
           }
         >
           <Route index element={<Navigate to="/students" />} />
-          <Route path="students" element={<Students />} />
+          <Route path="students" element={<StudentsManagement />} />
         </Route>
+      
+              <Route
+          path="/EditStudentDetails"
+          element={
+            <ProtectedRoute>
+              <EditStudentDetails/>
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Navigate to="/EditStudentDetails" />} />
+          <Route path="EditStudentDetails" element={<EditStudentDetails />} />
+        </Route>
+
         <Route
           path="/drives"
           element={
