@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# 💻 School Vaccination Portal - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend of the **School Vaccination Portal** built with **React**. 
+It allows school coordinators to manage students, vaccination drives, and view vaccination reports.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Tech Stack
 
-### `npm start`
+- React.js
+- Axios (for API communication)
+- React Router DOM (for navigation)
+- CSS 
+- Context API / Local Storage (for auth/session)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📁 Folder Structure
 
-### `npm test`
+```
+frontend/
+├── public/
+├── src/
+│   ├── components/        # Reusable components (sidebar, forms, etc.)
+│   ├── pages/             # Pages like Login, Dashboard, Students, Reports
+│   ├── styles/            # CSS or Tailwind styles
+│   ├── App.js             # App entry point with routes
+│   ├── index.js           # Root ReactDOM render
+│   └── apiConfig.js 
+└── README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🧑‍💻 Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 🔐 Login as School Coordinator (simple auth)
+- 🧒 Add, Edit, Delete students
+- 📂 Upload student data via CSV
+- 💉 Schedule and view vaccination drives
+- 📊 View vaccination reports
+- 📌 Dashboard showing key metrics
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🔧 Getting Started (Local Setup)
 
-### `npm run eject`
+### 1. Clone the frontend branch
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone -b frontend https://github.com/your-username/school-vaccination-portal.git
+cd school-vaccination-portal
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. Install dependencies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install react react-dom react-router-dom axios
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Configure API Base URL
 
-## Learn More
+In `src/apiConfig.js`:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+const API_BASE_URL = 'http://localhost:5000/api';
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. Run the app
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The frontend will start on:
+```
+http://localhost:3000
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🧪 Pages Summary
 
-### Making a Progressive Web App
+| Page                | Description                               |
+|---------------------|-------------------------------------------|
+| `/login`            | School coordinator login page             |
+| `/dashboard`        | Overview of total/vaccinated students     |
+| `/students`         | Add/Edit/Delete/Search/Upload students    |
+| `/drives`           | Schedule and view vaccination drives      |
+| `/reports`          | View/export vaccination reports           |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## ⚠️ Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Ensure the **backend** is running on port `5000`
+- Test API endpoints using Postman if needed
+- Keep `.env` variables consistent
+---
 
-### Deployment
+## 👨‍🔧 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Developed by [Sahil Tamboli]  
