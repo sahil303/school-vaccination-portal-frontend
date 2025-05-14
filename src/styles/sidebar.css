@@ -16,8 +16,8 @@ body, html, #root {
   background: linear-gradient(to bottom, #6a11cb, #2575fc);
   color: #fff;
   transition: width 0.8s ease;
-  width: 250px;
-  min-width: 250px;
+  width: 280px;
+  min-width: 280px;
   display: flex;
   flex-direction: column;
 }

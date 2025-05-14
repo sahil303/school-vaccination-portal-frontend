@@ -2,23 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import '../styles/Students.css';
 import Sidebar from '../components/Sidebar';
-import { useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS } from '../apiConfig';
-
-const formatDate = (dateString) => {
-  if (!dateString) return 'N/A';
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
-};
 
 function StudentManagement() {
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const effectRan = useRef(false);
-  const navigate = useNavigate();
-
-   const [studentData, setStudentData] = useState({
+  const [search, setSearch] = useState('');
+  const [studentData, setStudentData] = useState({
     id: '',
     std_name: '',
     std_class: '',
@@ -27,8 +19,20 @@ function StudentManagement() {
     vacc_date: '',
   });
 
-    useEffect(() => {
-    const getAllStudents = async () => {
+  const [editStudent, setEditStudent] = useState(null);
+
+   useEffect(() => {
+ 
+    if (!effectRan.current) {
+    getAllStudents();
+    }
+
+    effectRan.current = true;
+  },
+  []);
+
+  // fetch API
+     const getAllStudents = async () => {
       setIsLoading(true);
       setError('');
    try {
@@ -47,13 +51,6 @@ function StudentManagement() {
       }
     }
 
-    if (!effectRan.current) {
-    getAllStudents();
-    }
-
-    effectRan.current = true;
-  },
-  []);
 
   const handleChange = (e) => {
     setStudentData({ ...studentData, [e.target.name]: e.target.value });
@@ -73,24 +70,49 @@ function StudentManagement() {
       });
 
       if (response.data) {
-          window.location.reload();
+         getAllStudents(); // refresh list
+         setStudentData({
+          id: '',
+          std_name: '',
+          std_class: '',
+          vaccinationStatus: '',
+          vacc_name: '',
+          vacc_date: '',
+        });
       }
-
     } catch (err) {
-      if (err.response && err.response.data && err.response.data.message) {
+      if (err.response && err.response.data && err.response.data) {
         setError(err.response.data.message);
       }
       console.error('Login API error:', err);
-    } 
-
-    alert(error);
+      alert(error);
+    }
   };
 
-  const handleEdit = (student_id) => {
-    
-    sessionStorage.setItem('studentId', student_id);
-    navigate(`/editStudentDetails`);
-  };
+  const handleEdit = (student) => {
+    console.log(student);
+  setEditStudent({ ...student });
+};
+
+const handleEditChange = (e) => {
+  const { name, value } = e.target;
+  setEditStudent((prev) => ({
+    ...prev,
+    [name]: name === 'vaccinated' ? value === 'true' : value,
+  }));
+};
+
+const submitEdit = async (e) => {
+  e.preventDefault();
+  try {
+    await axios.put(API_ENDPOINTS.UPDATE_STUDENT(editStudent.student_id), editStudent);
+    setEditStudent(null);
+    getAllStudents(); // refresh list
+  } catch (err) {
+    console.error(err.data.message);
+    alert(err.data.message);
+  }
+};
 
   // Delete student
   const handleDelete = async (id) => {
@@ -101,9 +123,7 @@ function StudentManagement() {
       await axios.delete(`${API_ENDPOINTS.DELETE_STUDENT(id)}`, {
             student_id: id,
       });
-      alert('Student deleted successfully.');
 
-      // Optionally refresh or filter local state:
       setStudents(prev => prev.filter(s => s.student_id !== id));
     } catch (error) {
       console.error('Failed to delete student:', error);
@@ -111,8 +131,6 @@ function StudentManagement() {
     }
 
   };
-
-    const [search, setSearch] = useState('');
 
    const filtered = (Array.isArray(students) ? students : []).filter(s =>
     s.name.toLowerCase().includes(search.toLowerCase())
@@ -155,11 +173,16 @@ function StudentManagement() {
     }
 
     alert('Bulk upload completed.');
-     window.location.reload();
+    getAllStudents();
   };
 
   reader.readAsText(file);
 };
+
+if(isLoading)
+  return(
+    <h1>Student Data Loading...</h1>
+  )
 
   return (
      <div className="student-management" role="main" aria-label="Student-Management">
@@ -181,7 +204,6 @@ function StudentManagement() {
 
                 <button type="submit">Add Student</button>
               </form>
-
            <div className="students-actions">
               <input
                 type="text"
@@ -205,13 +227,45 @@ function StudentManagement() {
             </div>
         </section>
 
+         <section>
+                {editStudent && (
+                    <>
+                      <div className="modal-backdrop" onClick={() => setEditStudent(null)}></div>
+                      <div className="modal">
+                        <form onSubmit={submitEdit}>
+                          <h3>Edit Student</h3>
+                            
+                          <div className="form-group">
+                            <label>Name</label>
+                            <input name="student_id" value={editStudent.student_id} onChange={handleEditChange} disabled />
+                          </div>
+
+                          <div className="form-group">
+                            <label>Name</label>
+                            <input name="name" value={editStudent.name} onChange={handleEditChange} required />
+                          </div>
+
+                          <div className="form-group">
+                            <label>Class</label>
+                            <input name="student_class" value={editStudent.student_class} onChange={handleEditChange} required />
+                          </div>
+
+                          <div className="form-actions">
+                            <button type="submit" className="btn primary">Update</button>
+                            <button type="button" className="btn secondary" onClick={() => setEditStudent(null)}>Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </>
+                  )}
+
+        </section>
         <section>
           <div className="students-table-container">
           <table>
             <thead>
               <tr>
-                <th>Student Id</th><th>Name</th><th>Class</th><th>Status</th>
-                <th>Vaccine Name</th><th>Vaccination Date</th><th>Actions</th>
+                <th>Student Id</th><th>Name</th><th>Class</th><th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -221,13 +275,8 @@ function StudentManagement() {
                     <td>{student.student_id}</td>
                     <td>{student.name}</td>
                     <td>{student.student_class}</td>
-                    <td className={student.vaccinated ? 'status yes' : 'status no'}>
-                      {student.vaccinated ? 'Vaccinated' : 'Pending'}
-                    </td>
-                    <td>{student.vaccine_name ? student.vaccine_name : 'N/A'}</td>
-                    <td>{formatDate(student.vaccination_date)}</td>
                     <td>
-                      <button className="edit-btn" onClick={() =>handleEdit(student.student_id)}>Edit</button>
+                      <button className="edit-btn" onClick={() =>handleEdit(student)}>Edit</button>
                       <button className="delete-btn"  onClick={() => handleDelete(student.student_id)}>Delete</button>
                     </td>
                   </tr>

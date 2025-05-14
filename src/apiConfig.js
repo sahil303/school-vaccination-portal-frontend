@@ -15,15 +15,17 @@ export const API_ENDPOINTS = {
 
   // Vaccination Drive Management
   GET_DRIVES: `${API_BASE_URL}/drives`,
+  GET_CURRENT_DRIVE: `${API_BASE_URL}/drives/current`,
   ADD_DRIVE: `${API_BASE_URL}/drives`, // POST
   GET_DRIVE_BY_ID: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
   UPDATE_DRIVE: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
+  DELETE_DRIVE: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
 
   // Dashboard
   GET_DASHBOARD_METRICS: `${API_BASE_URL}/dashboard`,
 
   // Reports
-  GENERATE_VACCINATION_REPORT: `${API_BASE_URL}/reports/vaccinations`,
+  GENERATE_VACCINATION_REPORT: `${API_BASE_URL}/reports`,
 };
 
 // You can also export the base URL if you need it separately sometimes

@@ -5,6 +5,7 @@ import '../styles/sidebar.css';
 import home from '../assets/home.png'
 import groups from '../assets/groups.png'
 import vaccine from '../assets/vaccine.png'
+import vaccinated from '../assets/vaccinated.png'
 import report from '../assets/report.png'
 import logout from '../assets/logout.png'
 
@@ -35,6 +36,11 @@ const navigateToDashboard = () =>
     navigate('/reports');
   };
 
+    const navigateToOpenDrive = () =>
+  {
+    navigate('/openDrive');
+  };
+
   const navigateToLogin = () =>
   {
     sessionStorage.clear();
@@ -59,13 +65,17 @@ const navigateToDashboard = () =>
             <img className="menu-icon" aria-hidden="true" src={home} alt='Home'/>
             <span className="menu-text">Home</span>
           </div>
+           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToOpenDrive}>
+            <img className="menu-icon" aria-hidden="true" src={vaccinated} alt='Oepn Drive'/>
+            <span className="menu-text">Open Drive</span>
+          </div>
           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToStudents}>
             <img className="menu-icon" aria-hidden="true" src={groups} alt='Student Manage icon'/>
             <span className="menu-text">Manage Students</span>
           </div>
           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToVaccineDrive}>    
             <img className="menu-icon" aria-hidden="true" src={vaccine} alt='Vaccine Drive'/>
-            <span className="menu-text">Vaccination Drives</span>
+            <span className="menu-text">Manage Vaccination Drives</span>
           </div>
           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToReports}>
             <img className="menu-icon" aria-hidden="true" src={report} alt='report'/>

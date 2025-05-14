@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Drives from './pages/Drives';
 import StudentsManagement from './pages/Students';
 import Reports from './pages/Reports';
-import EditStudentDetails from './pages/EditStudentDetails';
+import OpenDrive from './pages/OpenDrive';
 
 const isAuthenticated = () => sessionStorage.getItem('isLoggedIn');
 
@@ -32,6 +32,9 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />   
         </Route>
+
+        
+
         <Route
           path="/students"
           element={
@@ -43,19 +46,6 @@ function App() {
           <Route index element={<Navigate to="/students" />} />
           <Route path="students" element={<StudentsManagement />} />
         </Route>
-      
-              <Route
-          path="/EditStudentDetails"
-          element={
-            <ProtectedRoute>
-              <EditStudentDetails/>
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Navigate to="/EditStudentDetails" />} />
-          <Route path="EditStudentDetails" element={<EditStudentDetails />} />
-        </Route>
-
         <Route
           path="/drives"
           element={
@@ -68,6 +58,18 @@ function App() {
           <Route path="drives" element={<Drives />} />
         </Route>
 
+        <Route
+          path="/openDrive"
+          element={
+            <ProtectedRoute>
+              <OpenDrive/>
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Navigate to="/openDrive" />} />
+          <Route path="openDrive" element={<OpenDrive />} />
+        </Route>
+        
         <Route
           path="/reports"
           element={
