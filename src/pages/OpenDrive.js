@@ -4,6 +4,12 @@ import axios from 'axios';
 import '../styles/drive.css';
 import Sidebar from '../components/Sidebar';
 
+const formatDate = (dateString) => {
+  if (!dateString) return 'N/A';
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 function OpenDrive() {
   const [currentDrive, setCurrentDrive] = useState(null);
   const effectRan = useRef(false);
@@ -22,6 +28,7 @@ function OpenDrive() {
             try {
             const res = await axios.get(API_ENDPOINTS.GET_CURRENT_DRIVE);
             console.log(res.data.data);
+            console.log(new Date(res.data.data.drive_date).toLocaleDateString());
             setCurrentDrive(res.data.data);
             } catch (err) {
             console.error('Error fetching drives:', err);
@@ -48,14 +55,26 @@ function OpenDrive() {
 
        const handleVaccinate = async (student) =>
        {
-         student.vaccinated = true;
+        if(currentDrive.available_doses > 1)
+        {
+          student.vaccinated = true;
          student.vaccine_name = currentDrive.vaccine_name;
          student.vaccination_date = currentDrive.drive_date;
+         currentDrive.available_doses -= 1;
+          currentDrive.drive_date = new Date(currentDrive.drive_date).toLocaleDateString();
+        }
+        else{
+          return alert("No slots/vaccines available");
+        }
+
          try {
-            console.log(student);
+          console.log(currentDrive);
+                await axios.put(API_ENDPOINTS.UPDATE_DRIVE_AVAILABLE_DOSES(currentDrive.id), currentDrive);
+                fetchCurrentDrive();
+
                 await axios.put(API_ENDPOINTS.MARK_STUDENT_VACCINATED(student.student_id), student);
                 getAllStudents();
-
+                
             } catch (err) {
                 console.error(err.response.data.message);
                 alert(err.response.data.message);
@@ -72,6 +91,12 @@ function OpenDrive() {
         {currentDrive && <section>
           <div className="drive-container">
             <h2>{currentDrive.vaccine_name} Drive</h2>
+            <div className='drive-information'>
+
+              <h3>Applicable Classes: <span className='drive-info-value'>{currentDrive.applicable_classes}</span></h3>
+              <h3>Available Doses: <span className='drive-info-value'>{currentDrive.available_doses}</span></h3>
+              <h3>Date: <span className='drive-info-value'>{formatDate(currentDrive.drive_date)}</span></h3>
+            </div>
             <table>
             <thead>
               <tr>

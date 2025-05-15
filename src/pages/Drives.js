@@ -195,7 +195,7 @@ const submitEdit = async (e) => {
                 <td>{drive.vaccine_name}</td>
                 <td>{formatDate(new Date(drive.drive_date).toLocaleDateString())}</td>
                 <td>{drive.applicable_classes}</td>
-                <td>{drive.available_doses}</td>
+                <td>{isCurrentDrive(drive.drive_date) ? drive.available_doses : isPastDrive(drive.drive_date) ? 0 : drive.available_doses}</td>
                 <td>{isCurrentDrive(drive.drive_date) ? 'In Process' :  isPastDrive(drive.drive_date) ? 'Completed' : 'Scheduled'}</td>
                 <td>
                       {!isPastDrive(drive.drive_date) && <button className="edit-btn" onClick={() =>handleEdit(drive)}>Edit</button>}

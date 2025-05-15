@@ -67,7 +67,7 @@ const navigateToDashboard = () =>
           </div>
            <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToOpenDrive}>
             <img className="menu-icon" aria-hidden="true" src={vaccinated} alt='Oepn Drive'/>
-            <span className="menu-text">Open Drive</span>
+            <span className="menu-text">Active Drive</span>
           </div>
           <div className="menu-item" role="menuitem" tabIndex="0" onClick={navigateToStudents}>
             <img className="menu-icon" aria-hidden="true" src={groups} alt='Student Manage icon'/>

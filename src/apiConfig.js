@@ -19,6 +19,7 @@ export const API_ENDPOINTS = {
   ADD_DRIVE: `${API_BASE_URL}/drives`, // POST
   GET_DRIVE_BY_ID: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
   UPDATE_DRIVE: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
+  UPDATE_DRIVE_AVAILABLE_DOSES: (driveId) => `${API_BASE_URL}/drives/availableDoses/${driveId}`,
   DELETE_DRIVE: (driveId) => `${API_BASE_URL}/drives/${driveId}`,
 
   // Dashboard

@@ -166,3 +166,20 @@ body, html, #root {
   background-color: #6c757d;
   color: #fff;
 }
+
+.drive-information{
+  display: inline;
+  gap: 10px;
+
+}
+
+.drive-information h3{
+  text-align: right;
+  margin: 5px;
+}
+
+.drive-info-value
+{
+  text-align: center;
+  color: #007bff;
+}
